@@ -1,7 +1,5 @@
 ## Setup
 
-**Requirements:**
-
 1. Docker
 2. Docker Compose
 
@@ -22,3 +20,9 @@
 **Now you can run in the terminal**
 
 `docker-compose up -d`
+
+
+---
+
+* ports 80 and 3306 must be open
+* ".env" file must be in root directory
