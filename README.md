@@ -1,16 +1,24 @@
 ## Setup
 
-Requirements:
+**Requirements:**
 
--Docker
--Docker Compose
+1. Docker
+2. Docker Compose
 
-Before running ocker-compose up -d for the first time, you need to run the following commands:
 
-==> docker-compose run --rm -d -v $HOME/.cache/composer:/tmp -e COMPOSER_HOME=/tmp php composer install
+**Before running docker-compose up for the first time**
 
-==> docker-compose run --rm -d node npm ci
+> you need to run the following command:
+>
+> `docker-compose run --rm -v $HOME/.cache/composer:/tmp -e COMPOSER_HOME=/tmp php composer install`
+>
+> `docker-compose run --rm node npm ci`
 
-Now you can run:
 
-==> docker-compose up -d
+
+> you need to have the ".env" file in the root directory for laravel server to work
+
+
+**Now you can run in the terminal**
+
+`docker-compose up -d`
