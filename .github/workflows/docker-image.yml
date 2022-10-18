@@ -26,6 +26,6 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: ./Dockerfile
+          file: ./.docker/php/prod.Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/php4prod:latest
