@@ -15,7 +15,7 @@ services:
     ports:
       - 80:80
   node:
-    image: node:18
+    image: node:16
     user: node
     working_dir: /assets
     volumes:
