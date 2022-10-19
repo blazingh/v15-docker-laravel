@@ -39,7 +39,7 @@ jobs:
           context: .
           file: ./.docker/php/prod.Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/php4prod:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/php4prod:1.${{ github. run_number }}
 
       # Setup gcloud CLI
       - name: GKE authentication
@@ -58,7 +58,4 @@ jobs:
 
       # Deploy the Docker image to the GKE cluster
       - name: Deploy to GKE
-        run: |-
-          kubectl apply -f ./.kubernetes/config.yaml
-          kubectl rollout status deployment/$DEPLOYMENT_NAME
-          kubectl get services -o wide
+        run: kubectl set image deployment web php=blazingh/php4prod:1.${{ github. run_number }}
