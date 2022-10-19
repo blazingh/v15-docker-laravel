@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: web
+  name: web
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - image: blazingh/nginx4prod:latest
+          name: nginx
+          ports:
+            - containerPort: 80
+        - image: blazingh/php4prod:latest
+          name: php
+          env:
+            - name: APP_NAME
+              value: "Laravel"
+            - name: APP_ENV
+              value: "local"
+            - name: APP_KEY
+              value: base64:47IMyZp9wxLfwn7Y/vrrNDBKrEZl2FlHhulkzbJVScE=
+            - name: DB_CONNECTION
+              value: "mysql"
+            - name: DB_HOST
+              value: "34.118.113.220"
+            - name: DB_PORT
+              value: "3306"
+            - name: DB_DATABASE
+              value: "googlecloud"
+            - name: DB_USERNAME
+              value: "root"
+            - name: DB_PASSWORD
+              value: "root"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-service
+spec:
+  selector:
+    app: web
+  ports:
+    - protocol: TCP
+      port: 80
+  type: LoadBalancer
